@@ -1,22 +1,22 @@
-var rarities = ["common", "uncommon", "rare", "ultra-rare", "epic", "legendary"]
+let rarities = ["common", "uncommon", "rare", "ultra-rare", "epic", "legendary"]
 
-var commonnames = ["Doge Land", "Astrobolt", "Erynia and Draconia", "Waterfall State", "Reru Tanda", "Quebecshire", "EBay", "Sandpine Republic", "Womble-by-the-Sea", "A bloodred moon", "The Time Gem", "Quantum fartbox"]
-var cvalues = ["0.01", "0.05", "0.1", "0.5", "1", "2", "3", "5"]
+let commonnames = ["Doge Land", "Astrobolt", "Erynia and Draconia", "Waterfall State", "Reru Tanda", "Quebecshire", "EBay", "Sandpine Republic", "Womble-by-the-Sea", "A bloodred moon", "The Time Gem", "Quantum fartbox"]
+let cvalues = ["1", "2", "3", "4", "5"]
 
-var ucommonnames = ["Nonadia", "Toerana", "Chacapoya", "Dilber", "HumanSanity", "Kemonomica", "New Visayan Islands", "Varanius", "Altino", "Bobberino", "Electrum", "Evve Terre"]
-var ucvalues = ["0.05", "0.25", "0.5", "0.75", "1", "2.5", "4", "6"]
+let ucommonnames = ["Nonadia", "Toerana", "Chacapoya", "Dilber", "HumanSanity", "Kemonomica", "New Visayan Islands", "Varanius", "Altino", "Bobberino", "Electrum", "Evve Terre"]
+let ucvalues = ["1", "2", "3", "4", "6", "8"]
 
-var rarenames = ["Blackthorn Shade", "PenguinPies", "Marxmeans", "One Small Island", "North Prarie", "Arcis Concordis", "The"]
-var rvalues = ["0.1", "0.25", "0.5", "0.75", "1.5", "3", "5", "7.5"]
+let rarenames = ["Blackthorn Shade", "PenguinPies", "Marxmeans", "One Small Island", "North Prarie", "Arcis Concordis", "The"]
+let rvalues = ["2", "4", "6", "7", "8", "10"]
 
-var urarenames = ["New Makasta", "Agalaesia", "Meropis", "Wolflandil", "Warzone Codger", "Concrete Slab"]
-var urvalues = ["0.5", "0.75", "1", "2", "4", "5", "7.5", "10"]
+let urarenames = ["New Makasta", "Agalaesia", "Meropis", "Wolflandil", "Warzone Codger", "Concrete Slab"]
+let urvalues = ["3", "5", "7", "8", "10", "11", "13", "15"]
 
-var epicnames = ["Fauxia", "Drawkland", "Le Libertia", "New Rogernomics", "Esternial", "Lamebrainia"]
-var evalues = ["0.75", "1.5", "3", "5", "7.5", "10", "12.5", "15"]
+let epicnames = ["Fauxia", "Drawkland", "Le Libertia", "New Rogernomics", "Esternial", "Lamebrainia"]
+let evalues = ["5", "7", "8", "9", "11", "13", "15", "17"]
 
-var legnames = ["Candensia", "Eluvatar", "Frisbeeteria", "Lamoni", "Testlandia"]
-var lvalues = ["1", "3", "5", "8", "10", "12.5", "15", "17"]
+let legnames = ["Candensia", "Eluvatar", "Frisbeeteria", "Lamoni", "Testlandia"]
+let lvalues = ["10", "12", "15", "17", "19", "20", "22", "25"]
 
 function getDeck() {
 	let deck = new Array();
@@ -45,6 +45,32 @@ function getDeck() {
 	return deck;
 }
 
+function renderDeck(deck) {
+	document.getElementById("deck").innerHTML = "";
+	
+	for (let i = 0; i < deck.length; i++) {
+		let card = document.createElement("div");
+		// rarity sign
+		let rsign = "";
+		if (deck[i].Rarity == "common")
+		rsign = "Common";
+		else if (deck[i].Rarity == "uncommon")
+		rsign = "Uncommon";
+		else if (deck[i].Rarity == "rare")
+		rsign = "Rare";
+		else if (deck[i].Rarity == "ultra-rare")
+		rsign = "Ultra-Rare";
+		else if (deck[i].Rarity == "epic")
+		rsign = "Epic";
+		else
+		rsign = "Legendary";
+
+		card.innerHTML = deck[i].Name + '\n\n' + rsign + '\n\n' + deck[i].Value;
+		card.className = 'card';
+	document.getElementById("deck").appendChild(card);
+	}
+}
+
 function shuffle(deck) {
 	// shuffle 1000 times
 	for (let i = 0; i < 1000; i++) {
@@ -55,37 +81,15 @@ function shuffle(deck) {
 		deck[location1] = deck[location2];
 		deck[location2] = tmp;
 	}
-}
 
-function renderDeck(deck) {
-	document.getElementbyId("deck").innerHTML = "";
-	
-	for (let i = 0; i < deck.length; i++) {
-		let card = document.createElement("div");
-		// rarity sign
-		let rsign = "";
-		if (deck[i].Rarity == "common")
-		rsign = "C";
-		else if (deck[i].Rarity == "uncommon")
-		rsign = "UC";
-		else if (deck[i].Rarity == "rare")
-		rsign = "Rare";
-		else if (deck[i].Rarity == "ultra-rare")
-		rsign = "UR";
-		else if (deck[i].Rarity == "epic")
-		rsign = "Epic";
-		else
-		rsign = "L";
-
-		card.innerHTML = deck[i].Name + '' + rsign + '' + deck[i].Value;
-		card.className = 'card';
-	document.getElementbyId("deck").appendChild(card);
-	}
+	renderDeck(deck);
 }
 
 function dealCard(deck) {
 	return deck.pop();
 }
 
-let card = dealCard(deck1);
+let deck = getDeck()
+
+let card = dealCard(deck);
 console.log(card);
