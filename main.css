@@ -1,0 +1,30 @@
+.deck .card
+{
+    border: solid 1px #aaa;
+    border-radius: 9px;
+    width: 95px;
+    height: 150px;
+    float:left;
+    background-color: white;
+    padding: 3px 3px 3px 3px;
+    margin: 5px;
+}
+
+.card2
+{
+    width: 50px;
+    padding: 10px;
+    border: solid 1px #808080;
+    background-color: white;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 22px;
+    text-align: center;
+    margin: 3px;
+    border:solid 3px;
+}
+
+.card .value{
+    font-size:15pt;
+    font-family: sans-serif;
+}
